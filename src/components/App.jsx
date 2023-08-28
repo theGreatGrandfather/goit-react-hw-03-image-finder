@@ -26,18 +26,20 @@ export class App extends Component {
 async componentDidUpdate(prevProps, prevState) {
   const prevQuery = prevState.searchQuery;
   const nextQuery = this.state.searchQuery;
-  const prevPage = prevState.loadingPage;
-  const nextPage = this.state.loadingPage;
-  console.log('prevPage', prevPage)
-  console.log('nextPage', nextPage)
-
+  // const prevPage = prevState.loadingPage;
+  // const nextPage = this.state.loadingPage;
+  // console.log('prevPage', prevPage)
+  // console.log('nextPage', nextPage)
+ 
   if (nextQuery !== prevQuery || prevState.loadingPage !== this.state.loadingPage) {
+    console.log('prevState.loadingPage', prevState.loadingPage)
+    console.log('this.state.loadingPage', this.state.loadingPage)
     try {
       this.setState({
         loader: true
       });
 
-      const resp = await getImages(nextQuery, nextPage);
+      const resp = await getImages(nextQuery, this.state.loadingPage);
 
       this.setState((prevState) => ({
         images: nextQuery === prevState.searchQuery ? [...prevState.images, ...resp.hits] : [...resp.hits],
