@@ -18,7 +18,7 @@ export class App extends Component {
     images: [],
     showModal: false,
     urlLargeImg: '',
-    loadingPage: 0,
+    loadingPage: 1,
     allImagesLoaded: false,
     loader: false
   }
