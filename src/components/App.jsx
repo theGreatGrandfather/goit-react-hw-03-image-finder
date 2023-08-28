@@ -23,34 +23,34 @@ export class App extends Component {
     loader: false
   }
   
-  async componentDidUpdate(prevProps, prevState) {
-    const prevQuery = prevState.searchQuery;
-    const nextQuery = this.state.searchQuery;
-    const prevPage = prevState.loadingPage;
-    const nextPage = this.state.loadingPage;
+async componentDidUpdate(prevProps, prevState) {
+  const prevQuery = prevState.searchQuery;
+  const nextQuery = this.state.searchQuery;
+  const prevPage = prevState.loadingPage;
+  const nextPage = this.state.loadingPage;
 
-    if (nextQuery !== prevQuery || nextPage !== prevPage) {
-      try {
-        this.setState({
-          loader: true
-        })
-        const resp = await getImages(nextQuery, nextPage);
-        
-        this.setState((prevState) => ({
-          images: nextQuery === prevQuery ? [...prevState.images, ...resp.hits]: [...resp.hits],
-          allImagesLoaded: resp.totalHits === prevState.images.length + resp.hits.length,
-        }));
+  if (nextQuery !== prevQuery || nextPage !== prevPage) {
+    try {
+      this.setState({
+        loader: true
+      });
 
-      } catch (error) {
-        toast.error(`Something was wrong. Try to refresh the page`);
-      } finally {
-          this.setState({
-            loader: false
-          })
-        
-      }
+      const resp = await getImages(nextQuery, nextPage);
+
+      this.setState((prevState) => ({
+        images: nextQuery === prevState.searchQuery ? [...prevState.images, ...resp.hits] : [...resp.hits],
+        allImagesLoaded: resp.totalHits === prevState.images.length + resp.hits.length,
+      }));
+
+    } catch (error) {
+      toast.error(`Something was wrong. Try to refresh the page`);
+    } finally {
+      this.setState({
+        loader: false
+      });
     }
   }
+}
   
   getSearchQuery = query => {
     this.setState({
