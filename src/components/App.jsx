@@ -108,6 +108,7 @@ export class App extends Component {
         />
         {this.state.images.length > 0 && !this.state.allImagesLoaded && (
           <Button
+            type="button"
             onClick={this.changeLoadingPage}
           />
         )}
