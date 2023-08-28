@@ -77,8 +77,8 @@ export class App extends Component {
     this.setState(prevState => ({
       loadingPage: prevState.loadingPage +=1
     }));
-    console.log('first');
-    scroll.scrollMore(500);
+    // console.log('first');
+    // scroll.scrollMore(500);
   }
 
   render() {
